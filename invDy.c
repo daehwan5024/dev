@@ -10,7 +10,9 @@
 #define L_T 150 // thigh length
 #define L_C 150 // calf length
 
-int* invDy(int x_end_L, int y_end_L, int z_end_L, int x_end_R, int y_end_R, int z_end_R){
+
+// returns motor offset based on x, y, z value of end feet
+void invDy(int x_end_L, int y_end_L, int z_end_L, int x_end_R, int y_end_R, int z_end_R, int *angles){
     int th3_L = acos((x_end_L*x_end_L+(y_end_L-L_O)*(y_end_L-L_O)+z_end_L*z_end_L-L_H*L_H-L_T*L_T-L_C*L_C)/(2*L_T*L_C));
     int AL = L_T+L_C*cos(th3_L);
     int BL = L_C*sin(th3_L);
@@ -27,8 +29,12 @@ int* invDy(int x_end_L, int y_end_L, int z_end_L, int x_end_R, int y_end_R, int 
     int DR = L_T*cos(th2_R)+L_C*cos(th2_R+th3_R);
     int th1_R = asin(-z_end_R/sqrt(CR*CR+DR*DR))-atan(DR/CR);
 
-    int angles[6] = {th1_L, th2_L, th3_L, th1_R, th2_R, th3_R};
-    return angles;
+    angles[0] = th1_L;
+    angles[1] = th2_L;
+    angles[2] = th3_L;
+    angles[3] = th1_R;
+    angles[4] = th2_R;
+    angles[5] = th3_R;
 }
 
 int main() {
