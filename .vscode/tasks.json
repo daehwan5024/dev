@@ -9,7 +9,10 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lwiringPiDev",
+                "-lwiringPi",
+                "-lm",
             ],
             "options": {
                 "cwd": "${fileDirname}"

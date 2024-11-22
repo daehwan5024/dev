@@ -12,22 +12,22 @@
 
 
 // returns motor offset based on x, y, z value of end feet
-void invDy(int x_end_L, int y_end_L, int z_end_L, int x_end_R, int y_end_R, int z_end_R, int *angles){
-    int th3_L = acos((x_end_L*x_end_L+(y_end_L-L_O)*(y_end_L-L_O)+z_end_L*z_end_L-L_H*L_H-L_T*L_T-L_C*L_C)/(2*L_T*L_C));
-    int AL = L_T+L_C*cos(th3_L);
-    int BL = L_C*sin(th3_L);
-    int th2_L = asin(-x_end_L/(sqrt(AL*AL+BL*BL))) - atan(BL/AL);
-    int CL = L_H;
-    int DL = L_T*cos(th2_L)+L_C*cos(th2_L+th3_L);
-    int th1_L = asin(-z_end_L/sqrt(CL*CL+DL*DL))-atan(DL/CL);
+void invDy(double x_end_L, double y_end_L, double z_end_L, double x_end_R, double y_end_R, double z_end_R, double *angles){
+    double th3_L = acos((x_end_L*x_end_L+(y_end_L-L_O)*(y_end_L-L_O)+z_end_L*z_end_L-L_H*L_H-L_T*L_T-L_C*L_C)/(2*L_T*L_C));
+    double AL = L_T+L_C*cos(th3_L);
+    double BL = L_C*sin(th3_L);
+    double th2_L = asin(-x_end_L/(sqrt(AL*AL+BL*BL))) - atan(BL/AL);
+    double CL = L_H;
+    double DL = L_T*cos(th2_L)+L_C*cos(th2_L+th3_L);
+    double th1_L = asin(-z_end_L/sqrt(CL*CL+DL*DL))-atan(DL/CL);
     
-    int th3_R = acos((x_end_R*x_end_R+(y_end_R+L_O)*(y_end_L+L_O)+z_end_R*z_end_R-L_H*L_H-L_T*L_T-L_C*L_C)/(2*L_T*L_C));
-    int AR = L_T+L_C*cos(th3_R);
-    int BR = L_C*sin(th3_R);
-    int th2_R = asin(-x_end_R/(sqrt(AR*AR+BR*BR))) - atan(BR/AR);
-    int CR = L_H;
-    int DR = L_T*cos(th2_R)+L_C*cos(th2_R+th3_R);
-    int th1_R = asin(-z_end_R/sqrt(CR*CR+DR*DR))-atan(DR/CR);
+    double th3_R = acos((x_end_R*x_end_R+(y_end_R+L_O)*(y_end_L+L_O)+z_end_R*z_end_R-L_H*L_H-L_T*L_T-L_C*L_C)/(2*L_T*L_C));
+    double AR = L_T+L_C*cos(th3_R);
+    double BR = L_C*sin(th3_R);
+    double th2_R = asin(-x_end_R/(sqrt(AR*AR+BR*BR))) - atan(BR/AR);
+    double CR = L_H;
+    double DR = L_T*cos(th2_R)+L_C*cos(th2_R+th3_R);
+    double th1_R = asin(-z_end_R/sqrt(CR*CR+DR*DR))-atan(DR/CR);
 
     angles[0] = th1_L;
     angles[1] = th2_L;
@@ -39,7 +39,7 @@ void invDy(int x_end_L, int y_end_L, int z_end_L, int x_end_R, int y_end_R, int 
 
 int main() {
     int uart_fd;
-    char *uart_device = "/dev/serial0"; // UART 장치 경로(Raspberry Pi 기본 UART)
+    char uart_device[] = "/dev/serial0"; // UART 장치 경로(Raspberry Pi 기본 UART)
     int baud_rate = 9600; // STM32와 일치해야 함
     int number_to_send = 12345; // 보낼 숫자 예시
 
